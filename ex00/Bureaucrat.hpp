@@ -4,36 +4,30 @@ class	Bureaucrat
 {
 	private:
 		const std::string	_name;
-		unsigned int		_grade;
+		int			_grade;
 
 	public:
 					Bureaucrat(void);
 					~Bureaucrat(void);
 
-					Bureaucrat(const std::string name, unsigned int grade);
+					Bureaucrat(const std::string name, int grade);
 					Bureaucrat(const Bureaucrat& other);
 		Bureaucrat&		operator=(const Bureaucrat& other);
 
-		void			getName(void) const;
-		void			getGrade(void) const;
+		std::string		getName(void) const;
+		int			getGrade(void) const;
 		void			promote(void);
 		void			depromote(void);
 
 		class			GradeTooHighException : std::exception
 		{
 					public:
-						const char	*what() const throw()
-						{
-							return "Grade too high";
-						}
+						const char	*what() const throw();
 		};
 		class			GradeTooLowException : std::exception
 		{
 					public:
-						const char	*what() const throw()
-						{
-							return "Grade too low";
-						}
+						const char	*what() const throw();
 		};
 };
 

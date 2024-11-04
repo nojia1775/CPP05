@@ -10,8 +10,14 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Bureaucrat " << _name << " destructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string name, unsigned int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 {
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		this->_grade = grade;
 	std::cout << "Bureaucrat " << _name << " constructor called" << std::endl;
 }
 
@@ -27,28 +33,45 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
 	return *this;
 }
 
-void	Bureaucrat::getName(void) const
+std::string	Bureaucrat::getName(void) const
 {
-	std::cout << _name << std::endl;
+	return _name;
 }
 
-void	Bureaucrat::getGrade(void) const
+int	Bureaucrat::getGrade(void) const
 {
-	std::cout << _grade << std::endl;
+	return _grade;
 }
 
 void	Bureaucrat::promote(void)
 {
-	this->_grade--;
+	if (_grade == 1)
+		throw Bureaucrat::GradeTooHighException();
+	else
+		this->_grade--;
 }
 
 void	Bureaucrat::depromote(void)
 {
-	this->_grade++;
+	if (_grade == 150)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		this->_grade++;
 }
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& bureaucrat)
 {
 	o << "Bureaucrat name is " << bureaucrat.getName() << std::endl;
-	o << "Bureaucrat garde is " << bureaucrat.getGrade() << std::endl;
+	o << "Bureaucrat grade is " << bureaucrat.getGrade();
+	return o;
+}
+
+const char	*Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return "Grade too high";
+}
+
+const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return "Grade too low";
 }
