@@ -1,14 +1,14 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(void) : _name("default"), _grade(150)
 {
-	std::cout << "Bureaucrat " << _name << " default constructor called" << std::endl;
+	//std::cout << "Bureaucrat " << _name << " default constructor called" << std::endl;
 }
 
 Bureaucrat::~Bureaucrat(void)
 {
-	std::cout << "Bureaucrat " << _name << " destructor called" << std::endl;
+	//std::cout << "Bureaucrat " << _name << " destructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
@@ -19,12 +19,12 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->_grade = grade;
-	std::cout << "Bureaucrat " << _name << " constructor called" << std::endl;
+	//std::cout << "Bureaucrat " << _name << " constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade)
 {
-	std::cout << "Bureaucrat " << _name << " copy constructor calles" << std::endl;
+	//std::cout << "Bureaucrat " << _name << " copy constructor calles" << std::endl;
 }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& other)
@@ -77,7 +77,7 @@ const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
 	return "Grade too low";
 }
 
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& form)
 {
 	try
 	{
@@ -87,4 +87,9 @@ void	Bureaucrat::signForm(Form& form)
 	{
 		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(const AForm& form)
+{
+	form.execute(*this);
 }
