@@ -3,18 +3,10 @@
 int	main(void)
 {
 	Bureaucrat *a = NULL;
-
 	try
 	{
-		a = new Bureaucrat("noah", 200);
-	}
-	catch (const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << e.what() << std::endl;
+		a = new Bureaucrat("Noah", 1);
+		std::cout << *a << std::endl;
 	}
 	catch (const std::exception& e)
 	{
@@ -25,20 +17,12 @@ int	main(void)
 		try
 		{
 			a->promote();
+			std::cout << *a << std::endl;
 		}
-		catch (const std::exception& e)
+		catch(const std::exception& e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cerr << e.what() << '\n';
 		}
-		catch (const Bureaucrat::GradeTooLowException& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		catch (const Bureaucrat::GradeTooHighException& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		std::cout << *a << std::endl;
 		delete a;
 	}
 	return 0;
