@@ -1,20 +1,26 @@
-#ifndef SHRUBERRYCREATIONFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
 
-# define SHRUBERRYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
+# include <iostream>
+# include <fstream>
 # include "AForm.hpp"
+# include "Bureaucrat.hpp"
 
-class	ShruberryCreationForm : public AForm
+class Bureaucrat;
+
+class	ShrubberyCreationForm : public AForm
 {
 	public:
-						ShruberryCreationForm(void);
-						~ShruberryCreationForm(void);
+					ShrubberyCreationForm(void);
+					~ShrubberyCreationForm(void);
 
-						ShruberryCreationForm(std::string name);
-						ShruberryCreationForm(const ShruberryCreationForm& other);
-		const ShruberryCreationForm&	operator=(const ShruberryCreationForm& other);
+					ShrubberyCreationForm(const std::string name);
+					ShrubberyCreationForm(const ShrubberyCreationForm& other);
+		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& other);
 
-		void				exec(std::string target) const;
+		void			execute(const Bureaucrat& executor) const;
+
 };
 
 #endif

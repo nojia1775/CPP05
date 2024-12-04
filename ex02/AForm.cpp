@@ -11,7 +11,7 @@ AForm::~AForm(void)
 	std::cout << "AForm " << _name << " destructor called" << std::endl;
 }
 
-AForm::AForm(std::string name, int exec_grade, int sign_grade) : _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
+AForm::AForm(std::string name, const int sign_grade, const int exec_grade) : _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
 {
 	if (_exec_grade < 1 || _sign_grade < 1)
 		throw AForm::GradeTooHighException();
@@ -28,11 +28,7 @@ AForm::AForm(const AForm& other) : _name(other._name), _signed(other._signed), _
 AForm&	AForm::operator=(const AForm& other)
 {
 	if (this != &other)
-	{
 		_signed = other._signed;
-		_exec_grade = other._exec_grade;
-		_sign_grade = other._sign_grade;
-	}
 	std::cout << "AForm " << _name << " operator constructor called" << std::endl;
 	return *this;
 }
@@ -60,10 +56,16 @@ int	AForm::getSignGrade(void) const
 	return _sign_grade;
 }
 
+bool	AForm::getSigned(void) const
+{
+	return _signed;
+}
+
 std::ostream&	operator<<(std::ostream& o, const AForm& form)
 {
 	o << "AForm name is " << form.getName() << std::endl;
 	o << "AForm execution grade is " << form.getExecGrade() << std::endl;
 	o << "AForm sign grade is " << form.getSignGrade() << std::endl;
+	o << "AForm is signed ? " << form.getSigned() << std::endl;
 	return o;
 }
