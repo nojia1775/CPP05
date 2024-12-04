@@ -12,14 +12,14 @@ class	Form
 	private:
 		const std::string	_name;
 		bool			_signed;
-		int			_sign_grade;
-		int			_exec_grade;
+		const int 		_sign_grade;
+		const int		_exec_grade;
 
 	public:
 					Form(void);
 					~Form(void);
 
-					Form(std::string name, int sign_grade, int exec_grade);
+					Form(std::string name, const int sign_grade, const int exec_grade);
 					Form(const Form& other);
 		Form&			operator=(const Form& other);
 
@@ -27,6 +27,7 @@ class	Form
 		const std::string	getName(void) const;
 		int			getExecGrade(void) const;
 		int			getSignGrade(void) const;
+		bool			getSigned(void) const;
 
 		class			GradeTooLowException : public std::exception
 		{
@@ -36,6 +37,7 @@ class	Form
 							return "Grade too low";
 						}
 		};
+
 		class			GradeTooHighException : public std::exception
 		{
 					public:

@@ -11,7 +11,7 @@ Form::~Form(void)
 	std::cout << "Form " << _name << " destructor called" << std::endl;
 }
 
-Form::Form(std::string name, int exec_grade, int sign_grade) : _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
+Form::Form(std::string name, const int sign_grade, const int exec_grade) : _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
 {
 	if (_exec_grade < 1 || _sign_grade < 1)
 		throw Form::GradeTooHighException();
@@ -28,11 +28,7 @@ Form::Form(const Form& other) : _name(other._name), _signed(other._signed), _sig
 Form&	Form::operator=(const Form& other)
 {
 	if (this != &other)
-	{
 		_signed = other._signed;
-		_exec_grade = other._exec_grade;
-		_sign_grade = other._sign_grade;
-	}
 	std::cout << "Form " << _name << " operator constructor called" << std::endl;
 	return *this;
 }
@@ -60,10 +56,16 @@ int	Form::getSignGrade(void) const
 	return _sign_grade;
 }
 
+bool	Form::getSigned(void) const
+{
+	return _signed;
+}
+
 std::ostream&	operator<<(std::ostream& o, const Form& form)
 {
 	o << "Form name is " << form.getName() << std::endl;
 	o << "Form execution grade is " << form.getExecGrade() << std::endl;
 	o << "Form sign grade is " << form.getSignGrade() << std::endl;
+	o << "Form is signed ? " << form.getSigned() << std::endl;
 	return o;
 }
