@@ -2,28 +2,15 @@
 
 int	main(void)
 {
-	Bureaucrat *a = NULL;
 	try
 	{
-		a = new Bureaucrat("Noah", 1);
-		std::cout << *a << std::endl;
+		Bureaucrat a("Noah", 151);
+		std::cout << a << "\n";
+		a.promote();
+		std::cout << a << "\n";
+		a.depromote();
+		std::cout << a << "\n";
 	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	if (a)
-	{
-		try
-		{
-			a->promote();
-			std::cout << *a << std::endl;
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-		}
-		delete a;
-	}
+	catch (const std::exception& e) { std::cout << e.what() << "\n"; }
 	return 0;
 }

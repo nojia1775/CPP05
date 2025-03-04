@@ -4,21 +4,26 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
-int	main(void)
+int main(void)
 {
-	Intern a;
-	Bureaucrat b("buro", 1);
-	AForm *form = NULL;
 	try
 	{
-		form = a.makeForm("robotomy request", "test");
-		b.signForm(*form);
-		b.executeForm(*form);
-		delete form;
+		Intern intern;
+		Bureaucrat buro("Buro", 1);
+		AForm *form;
+		form = intern.makeForm("robotomy request", "test");
+		buro.signForm(*form);
+		buro.executeForm(*form);
+		form = intern.makeForm("shrubbery creation", "test");
+		buro.signForm(*form);
+		buro.executeForm(*form);
+		form = intern.makeForm("presidential pardon", "test");
+		buro.signForm(*form);
+		buro.executeForm(*form);
+		form = intern.makeForm("hugo tsr", "test");
+		buro.signForm(*form);
+		buro.executeForm(*form);
 	}
-	catch (std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	catch (const std::exception& e) { std::cout << e.what() << "\n"; }
 	return 0;
 }

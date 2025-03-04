@@ -31,20 +31,26 @@ class	Form
 
 		class			GradeTooLowException : public std::exception
 		{
-					public:
-						const char	*what(void) const throw()
-						{
-							return "Grade too low";
-						}
+			public:
+				const char	*what(void) const throw()
+				{
+					return "Grade too low";
+				}
 		};
 
 		class			GradeTooHighException : public std::exception
 		{
-					public:
-						const char	*what(void) const throw()
-						{
-							return "Grade too high";
-						}
+			public:
+				const char	*what(void) const throw()
+				{
+					return "Grade too high";
+				}
+		};
+
+		class			AlreadySigned : public std::exception
+		{
+			public:
+				const char	*what(void) const throw() { return "Form is already signed"; }
 		};
 };
 
